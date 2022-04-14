@@ -1,12 +1,12 @@
 import React from 'react';
-import TilesSet from '../../assets/tileset.gif'
-import { canvas } from '../../contexts/canvas/helpers';
-import { GAME_SIZE, typeCanvas } from '../../settings/constants';
-import Chest from '../Chest';
-import Demon from '../Demon';
-import Hero from '../Hero';
-import MiniDemon from '../MiniDemon';
-import Trap from '../Trap';
+import TilesSet from '../../../../assets/tileset.gif'
+import { canvas } from '../../../../contexts/helpers';
+import { GAME_SIZE, typeCanvas } from '../../../../settings/constants';
+import Chest from '../../Static/Chest';
+import Demon from '../../Dinamic/Demon';
+import Hero from '../../Dinamic/Hero';
+import MiniDemon from '../../Dinamic/MiniDemon';
+import Trap from '../../Static/Trap';
 
 const getCanvasMap = () => {
   let array = [];

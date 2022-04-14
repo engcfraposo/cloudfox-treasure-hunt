@@ -1,8 +1,8 @@
-import { canvas } from '../../contexts/canvas/helpers';
+import { Canvas, useCanvas } from '../../../../contexts/CanvasProvider';
 import Tile from './Tile';
 
 
-const getCanvasMap = () => {
+const getCanvasMap = ({canvas}:{canvas:Canvas}) => {
   let tileComponents = [];
   for(let y = 0; y < canvas.length; y++){
     const canvasY = canvas[y];
@@ -16,7 +16,8 @@ const getCanvasMap = () => {
 }
 
 const Debugger = () => {
-  const tilesComponents = getCanvasMap();
+  const { canvas } = useCanvas();
+  const tilesComponents = getCanvasMap({canvas});
   return(
     <div>
       {tilesComponents}

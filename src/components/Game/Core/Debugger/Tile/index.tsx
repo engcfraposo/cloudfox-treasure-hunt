@@ -1,5 +1,5 @@
-import { Position } from "../../../contexts/canvas/helpers";
-import { TILE_SIZE, typeCanvas } from "../../../settings/constants";
+import { Position } from "../../../../../contexts/helpers";
+import { TILE_SIZE, typeCanvas } from "../../../../../settings/constants";
 
 const Tile = ({position, text}:{position: Position, text:number}) => {
   const colors = {

@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { typeCanvas, typeEvent } from "../../settings/constants";
+import { typeCanvas, typeEvent, typeMovement } from "../settings/constants";
 
 
 export interface Position {
@@ -33,8 +32,8 @@ export const canvas = [
   [WA,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WA],
   [WA,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,DE,FL,FL,FL,WA],
   [WA,FL,FL,TR,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WA],
-  [WA,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WA],
-  [WA,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WA],
+  [WA,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WA,WA,FL,FL,FL,FL,WA],
+  [WA,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WA,WA,FL,FL,FL,FL,WA],
   [WA,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,MD,FL,FL,FL,TR,FL,FL,FL,WA],
   [WA,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WA],
   [WA,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WA],
@@ -42,22 +41,54 @@ export const canvas = [
   [WA,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WA],
   [WA,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WA],
   [WA,FL,FL,FL,FL,FL,FL,FL,FL,CH,FL,FL,FL,FL,FL,FL,FL,FL,FL,WA],
-  [WA,HR,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,MD,FL,FL,WA],
-  [WA,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WA],
-  [WA,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WA],
+  [WA,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,MD,FL,FL,WA],
+  [WA,HR,WA,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,FL,WA],
+  [WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA],
   [WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA,WA],
 ];
 
-export const hasValidMovement =(currentPosition, nextPosition)=>{
-  const canvasNextPosition = canvas[nextPosition.y][nextPosition.x];
-  if(canvasNextPosition === typeCanvas.WA){
-    return false;
+export const hasValidMovement =(nextPosition, type)=>{
+  const canvasValue = canvas[nextPosition.y][nextPosition.x];
+  const Movements = {
+    [typeMovement.HERO]: getHeroActions(canvasValue),
+    [typeMovement.ENEMY]: getEnemyActions(canvasValue),
   }
-  if(canvasNextPosition === typeCanvas.CH){
-    console.log('pisou no bau');
+  return Movements[type]
+}
+
+const getHeroActions = (canvasValue) => {
+  const valid = [
+    typeCanvas.FL,
+    typeCanvas.MD,
+    typeCanvas.DE,
+    typeCanvas.CH,
+    typeCanvas.TR,
+    typeCanvas.DO,
+  ].includes(canvasValue)
+  const dead = [ 
+    typeCanvas.TR, 
+    typeCanvas.MD, 
+    typeCanvas.DE
+  ].includes(canvasValue)
+  const chest = [ typeCanvas.CH ].includes(canvasValue)
+  const door = [ typeCanvas.DO ].includes(canvasValue)
+  return {
+    valid,
+    dead,
+    chest,
+    door,
   }
-  if(canvasNextPosition === typeCanvas.TR){
-    console.log('pisou na trap');
+}
+
+const getEnemyActions = (canvasValue) => {
+  const valid = [
+    typeCanvas.FL,
+    typeCanvas.HR,
+  ].includes(canvasValue)
+  return {
+    valid,
+    dead: false,
+    chest: false,
+    door: false,
   }
-  return true
 }
