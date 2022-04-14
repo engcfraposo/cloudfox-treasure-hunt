@@ -1,6 +1,6 @@
-import ChestImg from '../../assets/CHEST.png';
-import { Position } from '../../contexts/canvas/helpers';
-import { TILE_SIZE } from '../../settings/constants';
+import ChestImg from '../../../../assets/CHEST.png';
+import { Position } from '../../../../contexts/helpers';
+import { TILE_SIZE } from '../../../../settings/constants';
 import "./styles.css";
 
 const Chest = ({initialPosition}:{initialPosition: Position}) => {

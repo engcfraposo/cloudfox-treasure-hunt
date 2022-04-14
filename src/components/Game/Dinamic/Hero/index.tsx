@@ -1,8 +1,8 @@
-import HeroImg from '../../assets/hero.png';
-import { HEAD_OFFSET, TILE_SIZE } from '../../settings/constants';
-import useHeroMovement from '../../hooks/useHeroMovement';
+import HeroImg from '../../../../assets/hero.png';
+import { HEAD_OFFSET, TILE_SIZE } from '../../../../settings/constants';
+import useHeroMovement from '../../../../hooks/useHeroMovement';
 import "./styles.css";
-import { Position } from '../../contexts/canvas/helpers';
+import { Position } from '../../../../contexts/helpers';
 
 const Hero = ({initialPosition}:{initialPosition:Position}) => {
   const { position, direction } = useHeroMovement({INITIAL_POSITION:initialPosition});

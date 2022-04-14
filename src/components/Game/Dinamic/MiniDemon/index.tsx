@@ -1,7 +1,7 @@
-import MiniDemonImg from '../../assets/MINI-DEMON.png';
-import { Position } from '../../contexts/canvas/helpers';
-import useEnemyMovement from '../../hooks/useEnemyMovement';
-import { HEAD_OFFSET, TILE_SIZE } from '../../settings/constants';
+import MiniDemonImg from '../../../../assets/MINI-DEMON.png';
+import { Position } from '../../../../contexts/helpers';
+import useEnemyMovement from '../../../../hooks/useEnemyMovement';
+import { HEAD_OFFSET, TILE_SIZE } from '../../../../settings/constants';
 import "./styles.css";
 
 const MiniDemon = ({initialPosition}:{initialPosition: Position}) => {
@@ -9,7 +9,7 @@ const MiniDemon = ({initialPosition}:{initialPosition: Position}) => {
   return (
     <div 
       style={{
-        top: TILE_SIZE * position.y,
+        top: TILE_SIZE * position.y - HEAD_OFFSET,
         left: TILE_SIZE * position.x,
         position: 'absolute',
         width: TILE_SIZE,

@@ -1,7 +1,7 @@
-import DemonImg from '../../assets/DEMON.png';
-import { Position } from '../../contexts/canvas/helpers';
-import useEnemyMovement from '../../hooks/useEnemyMovement';
-import { TILE_SIZE, DEMON_TILE_SIZE } from '../../settings/constants';
+import DemonImg from '../../../../assets/DEMON.png';
+import { Position } from '../../../../contexts/helpers';
+import useEnemyMovement from '../../../../hooks/useEnemyMovement';
+import { TILE_SIZE, DEMON_TILE_SIZE } from '../../../../settings/constants';
 import "./styles.css";
 
 const Demon = ({initialPosition}:{initialPosition: Position}) => {
@@ -15,9 +15,11 @@ const Demon = ({initialPosition}:{initialPosition: Position}) => {
       width: DEMON_TILE_SIZE,
       height: DEMON_TILE_SIZE,
       backgroundImage: `url(${DemonImg})`,
+      backgroundPosition: `0px 0px`,
       backgroundRepeat: 'no-repeat',
       animation: 'demon-animation 1s steps(4) infinite',
       transform: direction,
+      zIndex: 1,
     }} 
   />
   );
