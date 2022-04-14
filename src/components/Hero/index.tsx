@@ -9,7 +9,7 @@ const Hero = ({initialPosition}:{initialPosition:Position}) => {
   return (
     <div 
       style={{
-        top: TILE_SIZE * position.y,
+        top: TILE_SIZE * position.y - HEAD_OFFSET,
         left: TILE_SIZE * position.x,
         position: 'absolute',
         width: TILE_SIZE,
