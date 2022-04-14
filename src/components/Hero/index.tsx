@@ -1,23 +1,25 @@
 import HeroImg from '../../assets/hero.png';
-import { TILE_SIZE } from '../../settings/constants';
-import useHeroMovement from './hooks';
+import { HEAD_OFFSET, TILE_SIZE } from '../../settings/constants';
+import useHeroMovement from '../../hooks/useHeroMovement';
 import "./styles.css";
+import { Position } from '../../contexts/canvas/helpers';
 
-const Hero: React.FC = () => {
-  const { heroPosition, heroDirection } = useHeroMovement();
+const Hero = ({initialPosition}:{initialPosition:Position}) => {
+  const { position, direction } = useHeroMovement({INITIAL_POSITION:initialPosition});
   return (
     <div 
       style={{
-        bottom: TILE_SIZE * heroPosition.y,
-        left: TILE_SIZE * heroPosition.x,
+        top: TILE_SIZE * position.y,
+        left: TILE_SIZE * position.x,
         position: 'absolute',
         width: TILE_SIZE,
-        height: 100,
+        height: TILE_SIZE + HEAD_OFFSET,
         backgroundImage: `url(${HeroImg})`,
-        backgroundPosition: `0 ${TILE_SIZE * -1}`,
+        backgroundPosition: `0 -${TILE_SIZE - HEAD_OFFSET}px`,
         backgroundRepeat: 'no-repeat',
         animation: 'hero-animation 1s steps(4) infinite',
-        transform: heroDirection,
+        transform: direction,
+        zIndex: 1,
       }} 
     />
   );
