@@ -1,37 +1,34 @@
 import React from 'react';
-import TilesSet from '../../../../assets/tileset.gif'
+import TilesSet from '../../../../assets/tileset.gif';
+import OpenedDoor from '../../../../assets/DOOR-OPEN.png';
 import { canvas } from '../../../../contexts/helpers';
 import { GAME_SIZE, typeCanvas } from '../../../../settings/constants';
-import Chest from '../../Static/Chest';
-import Demon from '../../Dinamic/Demon';
-import Hero from '../../Dinamic/Hero';
-import MiniDemon from '../../Dinamic/MiniDemon';
-import Trap from '../../Static/Trap';
+import Chest from '../../static/Chest';
+import Demon from '../../dinamic/Demon';
+import Hero from '../../dinamic/Hero';
+import MiniDemon from '../../dinamic/MiniDemon';
+import Trap from '../../static/Trap';
+import { useChests } from '../../../../contexts/ChestsProvider';
+import { getCanvasMap } from './mapper';
 
-const getCanvasMap = () => {
-  let array = [];
-  for(let y = 0; y < canvas.length; y++){
-    const canvasY = canvas[y];
-    for(let x = 0; x < canvasY.length; x++){
-      const position = {x, y};
-      const text = canvas[y][x]
-      const respawn = {
-        [typeCanvas.HR]: <Hero key={`${x}-${y}`} initialPosition={position} />,
-        [typeCanvas.MD]: <MiniDemon key={`${x}-${y}`} initialPosition={position} />,
-        [typeCanvas.DE]: <Demon key={`${x}-${y}`} initialPosition={position} />,
-        [typeCanvas.TR]: <Trap key={`${x}-${y}`} initialPosition={position} />,
-        [typeCanvas.CH]: <Chest key={`${x}-${y}`} initialPosition={position} />, 
-      }
-      array.push(respawn[text]);
-    }
-  }
-  return array;
-}
-const elements = getCanvasMap();
+
 const Board: React.FC = () => {
+  const spawn = getCanvasMap();
+  const {totalChests, openedChests} = useChests();
   return (
     <div>
-        {elements}
+        {spawn}
+        {totalChests === openedChests.total &&
+          <img
+          src={OpenedDoor}
+          alt="door"
+          style={{
+            position: 'absolute',
+            right:192,
+            top: 0,
+          }}
+        />
+        }
         <img 
             src={TilesSet} 
             alt="background" 

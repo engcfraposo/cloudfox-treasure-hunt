@@ -11,7 +11,8 @@
     "@use-it/event-listener": "^0.1.7",
     "@use-it/interval": "^1.0.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-modal": "^3.14.4"
   },
   "devDependencies": {
     "@types/react": "^17.0.33",
