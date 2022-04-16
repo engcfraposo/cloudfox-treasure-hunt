@@ -1,12 +1,15 @@
 import { CanvasProvider } from './CanvasProvider';
-import { ChestProvider } from './ChestProvider';
+import { ChestsProvider } from './ChestsProvider';
+import { ModalProvider } from './ModalProvider';
 
 const AppProvider= ({children}) => {
   return(
     <CanvasProvider>
-      <ChestProvider>
+      <ChestsProvider>
+        <ModalProvider>
         {children}
-      </ChestProvider>
+        </ModalProvider>
+      </ChestsProvider>
     </CanvasProvider>
   );
 }

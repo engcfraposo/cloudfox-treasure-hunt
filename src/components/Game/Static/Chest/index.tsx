@@ -1,10 +1,18 @@
 import ChestImg from '../../../../assets/CHEST.png';
+import { useChests } from '../../../../contexts/ChestsProvider';
 import { Position } from '../../../../contexts/helpers';
 import { TILE_SIZE } from '../../../../settings/constants';
 import "./styles.css";
 
 const Chest = ({initialPosition}:{initialPosition: Position}) => {
   const position = initialPosition;
+  const { openedChests } = useChests();
+
+  const enableAnimation = openedChests.positions.find(
+    chestPosition =>  
+      chestPosition.x === initialPosition.x && chestPosition.y === initialPosition.y
+  );
+
   return (
     <div 
       style={{
@@ -15,7 +23,8 @@ const Chest = ({initialPosition}:{initialPosition: Position}) => {
         height: TILE_SIZE,
         backgroundImage: `url(${ChestImg})`,
         backgroundRepeat: 'no-repeat',
-        animation: 'chest-animation 1s steps(3) infinite',
+        backgroundPosition: `0px 0px`,
+        animation: enableAnimation && 'chest-animation 1s steps(2) forwards',
       }} 
     />
   );
