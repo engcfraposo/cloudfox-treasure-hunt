@@ -15,7 +15,6 @@ const useHeroMovement = ({INITIAL_POSITION}:{INITIAL_POSITION:Position}) => {
   
   useEventListener('keydown', ({key}:{key:string}) => {
     if(key.includes('Arrow')){
-
         const movement = updateCanvas(key, heroPosition, typeMovement.HERO);
         
         if(movement.nextMovement.valid){
